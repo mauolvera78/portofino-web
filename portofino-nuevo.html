@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofino Residencial — Elegancia y Comodidad en Atizapán</title>
+    <meta name="description" content="PORTOFINO Residencial, un desarrollo de 6 casas y 16 departamentos en Atizapán de Zaragoza. Elegancia, comodidad y seguridad para tu familia." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        /* ===== TOKENS ===== */
+        :root {
+            --navy:       #001250;
+            --navy-dark:  #000d3a;
+            --gold:       #c4a165;
+            --gold-light: #e8d4a8;
+            --gold-dark:  #9a7840;
+            --cream:      #f9f7f4;
+            --white:      #fefefe;
+            --text:       #1a1a1a;
+            --muted:      #6b6560;
+            --border:     rgba(0,0,0,0.09);
+            --border-lt:  rgba(0,0,0,0.05);
+            --nav-h:      85px;
+            --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+            --t:          all 0.35s var(--ease);
+            --shadow:     0 20px 40px -15px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text);
+            background: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===== LAYOUT ===== */
+        .wrap {
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+        .sec  { padding: 100px 0; }
+        .sec-sm { padding: 64px 0; }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .anim { opacity: 0; transition: opacity .75s var(--ease), transform .75s var(--ease); }
+        .fade-up   { transform: translateY(36px); }
+        .fade-left { transform: translateX(-36px); }
+        .fade-right{ transform: translateX(36px); }
+        .anim.in   { opacity: 1; transform: none; }
+        .d1 { transition-delay: .1s; }
+        .d2 { transition-delay: .2s; }
+        .d3 { transition-delay: .3s; }
+        .d4 { transition-delay: .4s; }
+        .d5 { transition-delay: .5s; }
+
+        /* ===== MICRO PIECES ===== */
+        .eyebrow {
+            display: inline-block;
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+        .rule {
+            display: block;
+            width: 44px;
+            height: 1px;
+            background: var(--gold);
+            margin: 1.2rem 0;
+        }
+        .rule-c { margin: 1.2rem auto; }
+
+        h2.display {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.12;
+            letter-spacing: -.02em;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 14px 32px;
+            font-family: 'Outfit', sans-serif;
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--t);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,.1); opacity:0; transition:opacity .2s; }
+        .btn:hover::after { opacity:1; }
+        .btn:active { transform:scale(.98); }
+        .btn-gold    { background:var(--gold); color:#fff; }
+        .btn-navy    { background:var(--navy); color:#fff; }
+        .btn-ghost   { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.35); }
+        .btn-ghost:hover { background:rgba(255,255,255,.08); }
+        .btn-wa {
+            background:#25D366; color:#fff;
+            border-radius:50px; padding:16px 36px;
+            font-size:.78rem;
+        }
+        .btn-full { width:100%; justify-content:center; }
+
+        /* ===== NAVBAR ===== */
+        #nav {
+            position: fixed; top:0; left:0; right:0;
+            z-index: 1000;
+            height: var(--nav-h);
+            transition: background .4s var(--ease), box-shadow .4s;
+        }
+        #nav.clear { background: linear-gradient(to bottom, rgba(0,18,80,.75) 0%, transparent 100%); }
+        #nav.solid  { background: var(--navy); box-shadow: 0 2px 24px rgba(0,0,0,.22); }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 100%; padding: 0 32px;
+        }
+        .nav-logo img { height: 44px; width: auto; display:block; object-fit:contain; }
+        .nav-links { display:flex; align-items:center; gap:4px; list-style:none; }
+        .nav-links a {
+            font-size: .7rem; font-weight:500; letter-spacing:.11em; text-transform:uppercase;
+            color: rgba(255,255,255,.82); text-decoration:none; padding:8px 12px;
+            transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--gold-light); }
+        .nav-links .nav-cta {
+            background: var(--gold); color:#fff !important;
+            padding: 10px 22px; margin-left:8px;
+        }
+        .nav-links .nav-cta:hover { background: var(--gold-dark); }
+
+        .hbg { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; background:none; border:none; }
+        .hbg span { display:block; width:24px; height:2px; background:#fff; transition:var(--t); }
+        .hbg.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+        .hbg.open span:nth-child(2) { opacity:0; }
+        .hbg.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+        #mob-menu {
+            display:none; position:fixed;
+            top:var(--nav-h); left:0; right:0;
+            background:var(--navy-dark); z-index:999;
+            padding:16px 24px 24px; pointer-events:none;
+            opacity:0; transform:translateY(-8px); transition:var(--t);
+        }
+        #mob-menu.open { display:block; opacity:1; transform:none; pointer-events:all; }
+        #mob-menu ul { list-style:none; }
+        #mob-menu a {
+            display:block; padding:14px 0; font-size:.75rem;
+            font-weight:500; letter-spacing:.15em; text-transform:uppercase;
+            color:rgba(255,255,255,.78); text-decoration:none;
+            border-bottom:1px solid rgba(255,255,255,.07); transition:color .2s;
+        }
+        #mob-menu a:hover { color:var(--gold-light); }
+
+        /* ===== HERO ===== */
+        #hero {
+            position:relative; min-height:100dvh;
+            display:flex; align-items:flex-end;
+            overflow:hidden;
+            background-color: var(--navy-dark);
+            background-image: url('./assets/img/hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .hero-vid {
+            display: none; /* imagen estática como fondo — iframe ocultado */
+        }
+        .hero-overlay {
+            position:absolute; inset:0; z-index:1;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,13,58,.35) 0%,
+                rgba(0,13,58,.2)  45%,
+                rgba(0,13,58,.72) 80%,
+                rgba(0,13,58,.92) 100%
+            );
+        }
+        .hero-body {
+            position:relative; z-index:2;
+            padding-bottom:80px; width:100%;
+        }
+        .hero-grid {
+            display:grid; grid-template-columns:1fr 1fr;
+            align-items:flex-end; gap:48px;
+        }
+        .hero-eyebrow {
+            display:inline-block; font-size:.65rem; font-weight:600;
+            letter-spacing:.26em; text-transform:uppercase;
+            color:var(--gold-light); margin-bottom:20px;
+        }
+        .hero-h1 {
+            font-family:'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 5.5vw, 5.8rem);
+            font-weight:300; line-height:1.04; letter-spacing:-.025em; color:#fff;
+            margin-bottom:22px;
+        }
+        .hero-h1 em { font-style:italic; color:var(--gold-light); }
+        .hero-p { font-size:1rem; color:rgba(255,255,255,.68); max-width:44ch; margin-bottom:36px; line-height:1.75; }
+        .hero-ctas { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+
+        .stat-box {
+            display:grid; grid-template-columns:1fr 1fr;
+            gap:1px; background:rgba(255,255,255,.1);
+            border:1px solid rgba(255,255,255,.1);
+        }
+        .stat-cell {
+            background:rgba(0,18,80,.55); backdrop-filter:blur(10px);
+            padding:26px 28px;
+        }
+        .stat-n {
+            font-family:'Cormorant Garamond', serif; font-size:3rem;
+            font-weight:300; color:#fff; line-height:1; margin-bottom:4px;
+        }
+        .stat-l {
+            font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+            color:rgba(255,255,255,.45);
+        }
+
+        .scroll-hint {
+            position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+            z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px;
+        }
+        .scroll-hint span { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.35); }
+        .scroll-line { width:1px; height:40px; background:rgba(255,255,255,.18); position:relative; overflow:hidden; }
+        .scroll-line::after {
+            content:''; position:absolute; top:-100%; left:0; width:100%; height:100%;
+            background:var(--gold); animation:sdn 1.6s ease-in-out infinite;
+        }
+        @keyframes sdn { 0%{top:-100%} 100%{top:100%} }
+
+        /* ===== NOSOTROS ===== */
+        #nosotros { background:var(--cream); }
+        .nos-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+        .nos-visual { position:relative; overflow:hidden; }
+        .nos-img {
+            width:100%; aspect-ratio:4/5; object-fit:cover; display:block;
+        }
+        .nos-video {
+            width:100%; aspect-ratio:4/5; object-fit:cover; display:block;
+            animation: nos-breathe 9s ease-in-out infinite;
+            will-change: transform;
+        }
+        @keyframes nos-breathe {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .nos-badge {
+            position:absolute; bottom:-24px; left:-24px;
+            background:var(--navy); color:#fff; padding:28px 32px; min-width:190px;
+        }
+        .nos-badge-n {
+            font-family:'Cormorant Garamond', serif;
+            font-size:2.8rem; font-weight:300; line-height:1; display:block; margin-bottom:4px;
+        }
+        .nos-badge-l { font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.55); }
+
+        /* ===== PROTOTIPOS ===== */
+        #prototipos { background:var(--white); }
+        .proto-hdr { text-align:center; margin-bottom:56px; }
+        .proto-tabs {
+            display:flex; justify-content:center;
+            border-bottom:1px solid var(--border); margin-bottom:52px; gap:0;
+        }
+        .proto-tab {
+            font-size:.7rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase;
+            color:var(--muted); padding:16px 36px; cursor:pointer;
+            border-bottom:2px solid transparent; background:none;
+            border-top:none; border-left:none; border-right:none;
+            transition:var(--t); white-space:nowrap;
+        }
+        .proto-tab.on   { color:var(--navy); border-bottom-color:var(--gold); }
+        .proto-tab:hover:not(.on) { color:var(--navy); }
+
+        .proto-panel     { display:none; }
+        .proto-panel.on  { display:block; }
+
+        .proto-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
+        .proto-pin  { position:sticky; top:110px; }
+        .proto-pin img { width:100%; display:block; object-fit:contain; }
+
+        .proto-type {
+            font-size:.65rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+            color:var(--gold); margin-bottom:8px;
+        }
+        .proto-name {
+            font-family:'Cormorant Garamond', serif; font-size:2.8rem; font-weight:400;
+            color:var(--navy); line-height:1.1; margin-bottom:32px;
+        }
+
+        .feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:28px; }
+        .feat-item {
+            display:flex; align-items:center; gap:10px;
+            padding:12px; background:var(--cream); border-radius:3px;
+        }
+        .feat-icon { width:30px; height:30px; object-fit:contain; flex-shrink:0; }
+        .feat-lbl  { font-size:.7rem; font-weight:500; color:var(--text); line-height:1.35; }
+
+        .proto-extras {
+            padding:18px 20px; border:1px solid var(--border); margin-bottom:24px;
+        }
+        .proto-extras-ttl {
+            font-size:.65rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase;
+            color:var(--muted); margin-bottom:12px;
+        }
+        .proto-extras ul { list-style:none; display:flex; flex-direction:column; gap:7px; }
+        .proto-extras li {
+            display:flex; align-items:center; gap:10px;
+            font-size:.88rem; color:var(--text);
+        }
+        .proto-extras li::before { content:''; display:block; width:16px; height:1px; background:var(--gold); flex-shrink:0; }
+
+        .proto-specs {
+            display:flex; gap:0; margin-bottom:28px;
+            background:var(--cream); border:1px solid var(--border-lt);
+        }
+        .spec-item { padding:18px 24px; flex:1; }
+        .spec-val {
+            font-family:'Cormorant Garamond', serif; font-size:1.7rem; font-weight:500;
+            color:var(--navy); line-height:1; margin-bottom:3px;
+        }
+        .spec-key { font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+        .spec-sep { width:1px; background:var(--border); align-self:stretch; }
+
+        .proto-price-blk { border-top:1px solid var(--border); padding-top:24px; }
+        .proto-price-lbl { font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+        .proto-price {
+            font-family:'Cormorant Garamond', serif; font-size:3.2rem; font-weight:400;
+            color:var(--navy); line-height:1; margin-bottom:4px;
+        }
+        .proto-price-note { font-size:.75rem; color:var(--gold); margin-bottom:22px; }
+
+        /* ===== AMENIDADES ===== */
+        #amenidades { background:var(--navy); }
+        #amenidades .eyebrow  { color:var(--gold-light); }
+        #amenidades h2.display{ color:#fff; }
+        #amenidades .rule     { background:var(--gold); }
+
+        .amn-hdr { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; gap:24px; }
+        .amn-hdr p { font-size:.95rem; color:rgba(255,255,255,.55); max-width:38ch; line-height:1.65; }
+
+        .amn-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
+        .amn-card {
+            position:relative; overflow:hidden; aspect-ratio:4/3; cursor:pointer;
+        }
+        .amn-card:first-child { grid-column:span 2; aspect-ratio:16/7; }
+        .amn-card img {
+            width:100%; height:100%; object-fit:cover; display:block;
+            transition:transform .65s var(--ease);
+        }
+        .amn-card:hover img { transform:scale(1.05); }
+        .amn-ovl {
+            position:absolute; inset:0;
+            background:linear-gradient(to top, rgba(0,18,80,.75) 0%, transparent 55%);
+            display:flex; align-items:flex-end; padding:18px 22px;
+        }
+        .amn-lbl { font-size:.65rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:#fff; }
+
+        /* ===== BENEFICIOS ===== */
+        #beneficios { background:var(--cream); padding:72px 0; }
+        .ben-hdr { text-align:center; margin-bottom:40px; }
+        .ben-grid {
+            display:grid; grid-template-columns:1fr 1fr;
+            border:1px solid var(--border);
+        }
+        .ben-col {
+            padding:40px 44px;
+            transition: background .35s var(--ease), box-shadow .35s var(--ease);
+            cursor: default;
+        }
+        .ben-col:first-child { border-right:1px solid var(--border); }
+        .ben-col:hover {
+            background: rgba(196,161,101,.04);
+            box-shadow: inset 0 0 0 1px rgba(196,161,101,.22),
+                        0 12px 32px -12px rgba(0,18,80,.1);
+        }
+        .ben-col-eyebrow {
+            font-size:.65rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+            color:var(--gold); margin-bottom:10px;
+        }
+        .ben-col h3 {
+            font-family:'Cormorant Garamond', serif; font-size:1.85rem; font-weight:400;
+            color:var(--navy); line-height:1.2; margin-bottom:22px;
+            letter-spacing:normal; text-transform:none;
+        }
+        .ben-list { list-style:none; display:flex; flex-direction:column; gap:0; }
+        .ben-list li {
+            display:flex; align-items:flex-start; gap:16px;
+            padding:11px 0; border-bottom:1px solid var(--border-lt);
+            font-size:.875rem; color:var(--text);
+            transition: color .25s ease, transform .3s var(--ease);
+        }
+        .ben-list li:last-child { border-bottom:none; }
+        .ben-list li:hover {
+            color: var(--navy);
+            transform: translateX(5px);
+        }
+        .ben-list li:hover .ben-ico svg { stroke: var(--gold-dark); }
+        .ben-ico {
+            width:20px; height:20px; display:flex; align-items:center; justify-content:center;
+            flex-shrink:0; margin-top:1px;
+        }
+        .ben-ico svg {
+            width:16px; height:16px; stroke:var(--gold); fill:none; stroke-width:2.5;
+            transition: stroke .25s ease;
+        }
+
+        /* ===== CTA ===== */
+        #cta {
+            background:var(--navy); position:relative; overflow:hidden;
+        }
+        #cta::before {
+            content:''; position:absolute; inset:0; opacity:.4;
+            background:radial-gradient(ellipse 70% 80% at 80% 50%, rgba(196,161,101,.18) 0%, transparent 65%);
+            pointer-events:none;
+        }
+        .cta-inner { position:relative; z-index:1; display:flex; justify-content:space-between; align-items:center; gap:48px; }
+        .cta-text .eyebrow { color:var(--gold-light); }
+        .cta-text h2.display { color:#fff; margin-top:4px; }
+        .cta-text p { color:rgba(255,255,255,.58); max-width:46ch; margin-top:1rem; }
+        .cta-card {
+            background:rgba(255,255,255,.05);
+            border:1px solid rgba(255,255,255,.12);
+            padding:36px 44px; min-width:300px; text-align:center; flex-shrink:0;
+        }
+        .cta-card-lbl { font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:8px; }
+        .cta-card-amt {
+            font-family:'Cormorant Garamond', serif; font-size:3.8rem; font-weight:300;
+            color:var(--gold-light); line-height:1; margin-bottom:4px;
+        }
+        .cta-card-note { font-size:.75rem; color:rgba(255,255,255,.4); margin-bottom:26px; }
+
+        /* ===== CONTACTO ===== */
+        #contacto { background:var(--white); }
+        .con-hdr  { margin-bottom:56px; }
+        .con-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+        .con-form-col { padding-right:60px; }
+
+        .fgrp { margin-bottom:20px; }
+        .flbl {
+            display:block; font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+            color:var(--muted); margin-bottom:8px;
+        }
+        .finp, .ftxt {
+            width:100%; padding:14px 16px; font-family:'Outfit',sans-serif; font-size:.9375rem;
+            color:var(--text); background:var(--cream); border:1px solid transparent;
+            transition:var(--t); outline:none; resize:none;
+        }
+        .finp:focus, .ftxt:focus { background:#fff; border-color:var(--gold); }
+        .ftxt { height:120px; }
+
+        .con-info { padding-top:36px; border-top:1px solid var(--border); margin-top:32px; display:flex; flex-direction:column; gap:16px; }
+        .con-info-row { display:flex; align-items:flex-start; gap:16px; }
+        .con-ico {
+            width:36px; height:36px; background:var(--navy);
+            display:flex; align-items:center; justify-content:center; flex-shrink:0;
+        }
+        .con-ico svg { width:15px; height:15px; stroke:#fff; fill:none; stroke-width:2; }
+        .con-lbl { font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+        .con-val { font-size:.88rem; color:var(--text); line-height:1.55; }
+        .con-val a { color:inherit; text-decoration:none; }
+        .con-val a:hover { color:var(--navy); }
+
+        .socials { display:flex; gap:10px; margin-top:20px; }
+        .soc-a {
+            width:40px; height:40px; background:var(--cream); border:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center; text-decoration:none; transition:var(--t);
+        }
+        .soc-a:hover { background:var(--navy); }
+        .soc-a svg { width:16px; height:16px; fill:var(--navy); transition:fill .2s; }
+        .soc-a:hover svg { fill:#fff; }
+
+        .map-wrap { height:100%; min-height:520px; position:relative; overflow:hidden; }
+        .map-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+        .map-tag {
+            position:absolute; top:20px; left:20px;
+            background:#fff; padding:16px 20px;
+            box-shadow:0 4px 20px rgba(0,0,0,.1);
+        }
+        .map-tag-sub { font-size:.63rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+        .map-tag-name {
+            font-family:'Cormorant Garamond', serif; font-size:1.2rem;
+            font-weight:500; color:var(--navy);
+        }
+
+        /* ===== FOOTER ===== */
+        footer { background:var(--navy-dark); }
+        .foot-top { padding:60px 0 48px; border-bottom:1px solid rgba(255,255,255,.07); }
+        .foot-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; }
+        .foot-logo img { height:40px; width:auto; margin-bottom:16px; }
+        .foot-tagline { font-size:.875rem; color:rgba(255,255,255,.45); max-width:30ch; line-height:1.7; margin-bottom:24px; }
+        .foot-col-title { font-size:.65rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:#fff; margin-bottom:20px; }
+        .foot-links { list-style:none; display:flex; flex-direction:column; gap:10px; }
+        .foot-links a { font-size:.875rem; color:rgba(255,255,255,.45); text-decoration:none; transition:color .2s; }
+        .foot-links a:hover { color:var(--gold-light); }
+        .foot-links span { font-size:.8rem; color:rgba(255,255,255,.3); line-height:1.6; }
+        .foot-socials { display:flex; gap:10px; }
+        .foot-soc {
+            width:34px; height:34px; background:rgba(255,255,255,.06);
+            display:flex; align-items:center; justify-content:center; text-decoration:none; transition:background .2s;
+        }
+        .foot-soc:hover { background:var(--gold); }
+        .foot-soc svg { width:14px; height:14px; fill:rgba(255,255,255,.55); transition:fill .2s; }
+        .foot-soc:hover svg { fill:#fff; }
+        .foot-btm { padding:20px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+        .foot-copy { font-size:.72rem; font-family:Arial,sans-serif; color:rgba(255,255,255,.28); }
+
+        /* ===== WA FLOAT ===== */
+        .wa-float {
+            position:fixed; bottom:28px; right:28px; width:56px; height:56px;
+            background:#25D366; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            text-decoration:none; z-index:999; transition:var(--t);
+            box-shadow:0 8px 28px rgba(37,211,102,.4);
+        }
+        .wa-float:hover { transform:translateY(-3px) scale(1.06); box-shadow:0 14px 36px rgba(37,211,102,.5); }
+        .wa-float svg { width:28px; height:28px; fill:#fff; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width:1024px) {
+            .hero-grid { grid-template-columns:1fr; }
+            .hero-stats-col { display:none; }
+            .nos-grid { grid-template-columns:1fr; gap:40px; }
+            .nos-visual { display:none; }
+            .proto-grid { grid-template-columns:1fr; }
+            .proto-pin  { position:relative; top:0; }
+            .ben-grid   { grid-template-columns:1fr; }
+            .ben-col:first-child { border-right:none; border-bottom:1px solid var(--border); }
+            .cta-inner  { flex-direction:column; }
+            .con-grid   { grid-template-columns:1fr; }
+            .con-form-col { padding-right:0; margin-bottom:40px; }
+            .foot-grid  { grid-template-columns:1fr 1fr; gap:36px; }
+        }
+        @media (max-width:768px) {
+            :root { --nav-h:70px; }
+            .sec { padding:64px 0; }
+            .wrap { padding:0 18px; }
+            .nav-links { display:none; }
+            .hbg  { display:flex; }
+            .hero-h1 { font-size:2.75rem; }
+            .feat-grid { grid-template-columns:repeat(2,1fr); }
+            .amn-grid { grid-template-columns:1fr 1fr; }
+            .amn-card:first-child { grid-column:span 2; aspect-ratio:16/7; }
+            .amn-hdr { flex-direction:column; align-items:flex-start; }
+            .ben-col { padding:40px 24px; }
+            .proto-tabs { overflow-x:auto; justify-content:flex-start; padding-bottom:1px; }
+            .foot-grid { grid-template-columns:1fr; gap:32px; }
+            .foot-btm  { flex-direction:column; text-align:center; }
+        }
+        @media (max-width:480px) {
+            .wrap { padding:0 14px; }
+            .feat-grid { grid-template-columns:1fr; }
+            .amn-grid  { grid-template-columns:1fr; }
+            .amn-card:first-child { grid-column:1; aspect-ratio:4/3; }
+            .hero-ctas { flex-direction:column; align-items:flex-start; }
+            .proto-specs { flex-direction:column; gap:0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ───── NAVBAR ───── -->
+<nav id="nav" class="clear">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <img src="logo portofino.png" alt="Portofino Residencial" />
+        </a>
+        <ul class="nav-links">
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#prototipos">Prototipos</a></li>
+            <li><a href="#amenidades">Amenidades</a></li>
+            <li><a href="#beneficios">Beneficios</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
+            <li><a href="https://wa.me/525530785124" class="nav-cta" target="_blank" rel="noopener">¡Aparta ya!</a></li>
+        </ul>
+        <button class="hbg" id="hbg" aria-label="Abrir menú">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mob-menu">
+    <ul>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#prototipos">Prototipos</a></li>
+        <li><a href="#amenidades">Amenidades</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+        <li><a href="https://wa.me/525530785124" target="_blank" rel="noopener">¡Aparta ya!</a></li>
+    </ul>
+</div>
+
+<!-- ───── HERO ───── -->
+<section id="hero">
+    <div class="hero-vid">
+        <iframe
+            src="https://www.youtube.com/embed/efWb33wCB_U?autoplay=1&mute=1&loop=1&playlist=efWb33wCB_U&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+            title="Portofino Residencial" frameborder="0"
+            allow="autoplay; fullscreen" loading="lazy">
+        </iframe>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-body">
+        <div class="wrap">
+            <div class="hero-grid">
+                <div class="anim fade-up">
+                    <span class="hero-eyebrow">Atizapán de Zaragoza &nbsp;·&nbsp; Estado de México</span>
+                    <h1 class="hero-h1">
+                        Donde la elegancia<br/>
+                        se encuentra<br/>
+                        con <em>la comodidad</em>
+                    </h1>
+                    <p class="hero-p">Un refugio exclusivo de 6 casas y 16 departamentos diseñado para familias que exigen lo mejor de la vida.</p>
+                    <div class="hero-ctas">
+                        <a href="#prototipos" class="btn btn-gold">Ver Prototipos</a>
+                        <a href="#nosotros"   class="btn btn-ghost">Conocer más</a>
+                    </div>
+                </div>
+                <div class="hero-stats-col anim fade-up d2">
+                    <div class="stat-box">
+                        <div class="stat-cell">
+                            <div class="stat-n"><span class="count-up" data-count="6">0</span></div>
+                            <div class="stat-l">Casas</div>
+                        </div>
+                        <div class="stat-cell">
+                            <div class="stat-n"><span class="count-up" data-count="16">0</span></div>
+                            <div class="stat-l">Departamentos</div>
+                        </div>
+                        <div class="stat-cell">
+                            <div class="stat-n"><span class="count-up" data-count="6">0</span></div>
+                            <div class="stat-l">Amenidades</div>
+                        </div>
+                        <div class="stat-cell">
+                            <div class="stat-n"><span class="count-up" data-count="24">0</span><span style="font-size:.6em;opacity:.7;">/7</span></div>
+                            <div class="stat-l">Seguridad</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- ───── NOSOTROS ───── -->
+<section id="nosotros" class="sec">
+    <div class="wrap">
+        <div class="nos-grid">
+            <div class="anim fade-left">
+                <span class="eyebrow">Sobre Nosotros</span>
+                <span class="rule"></span>
+                <h2 class="display">Conócenos</h2>
+                <p style="margin-top:1.5rem;margin-bottom:1.5rem;">
+                    En <strong style="color:var(--navy);">PORTOFINO Residencial</strong>, nos enorgullece presentarte un lugar donde la elegancia y la comodidad se entrelazan para crear un entorno excepcional. Como en un sueño hecho realidad, nuestro desarrollo ofrece un total de 6 encantadoras casas y 16 modernos departamentos, diseñados con un profundo respeto por la armonía y la calidad de vida.
+                </p>
+                <p>
+                    En el corazón de Atizapán, <strong style="color:var(--navy);">PORTOFINO Residencial</strong> se erige como un refugio sereno y seguro, perfectamente adaptado para las familias con clase que anhelan una vida llena de comodidades y paz.
+                </p>
+                <div style="margin-top:2.5rem;">
+                    <a href="#prototipos" class="btn btn-navy">Ver Prototipos</a>
+                </div>
+            </div>
+            <div class="nos-visual anim fade-right">
+                <video class="nos-video" autoplay muted loop playsinline>
+                    <source src="./assets/video/about.mp4" type="video/mp4" />
+                </video>
+                <div class="nos-badge">
+                    <span class="nos-badge-n">22</span>
+                    <span class="nos-badge-l">Unidades exclusivas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ───── PROTOTIPOS ───── -->
+<section id="prototipos" class="sec">
+    <div class="wrap">
+        <div class="proto-hdr anim fade-up">
+            <span class="eyebrow">Nuestras Unidades</span>
+            <span class="rule rule-c"></span>
+            <h2 class="display">Prototipos</h2>
+        </div>
+
+        <div class="proto-tabs anim fade-up d1">
+            <button class="proto-tab on"  data-tab="turin">Casa Turin</button>
+            <button class="proto-tab"     data-tab="piamonte">Casa Piamonte</button>
+            <button class="proto-tab"     data-tab="alba">Departamento Alba</button>
+        </div>
+
+        <!-- TURIN -->
+        <div class="proto-panel on" id="panel-turin">
+            <div class="proto-grid">
+                <div class="proto-pin anim fade-left">
+                    <img src="./assets/img/Residencia-CasaTurin.png" alt="Casa Turin" />
+                </div>
+                <div class="anim fade-right">
+                    <p class="proto-type">Residencia</p>
+                    <h3 class="proto-name">Casa Turin</h3>
+                    <div class="feat-grid">
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1_Mesa-de-trabajo-1.png" alt="" />
+                            <span class="feat-lbl">Cochera 2 autos techada</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-02.png" alt="" />
+                            <span class="feat-lbl">Sala y comedor</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-03.png" alt="" />
+                            <span class="feat-lbl">Cocina con barra desayunador</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-05.png" alt="" />
+                            <span class="feat-lbl">3 Recámaras</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/5.jpg" alt="" />
+                            <span class="feat-lbl">2.5 Baños</span>
+                        </div>
+                    </div>
+                    <div class="proto-extras">
+                        <p class="proto-extras-ttl">Características adicionales</p>
+                        <ul>
+                            <li>Recámara principal con walk-in closet</li>
+                            <li>Acceso azotea para construcción de Roof Garden</li>
+                            <li>Área para jardinera en entrada</li>
+                            <li>Fachada con cantera</li>
+                        </ul>
+                    </div>
+                    <div class="proto-specs">
+                        <div class="spec-item">
+                            <div class="spec-val">102 m²</div>
+                            <div class="spec-key">Terreno</div>
+                        </div>
+                        <div class="spec-sep"></div>
+                        <div class="spec-item">
+                            <div class="spec-val">229 m²</div>
+                            <div class="spec-key">Construcción</div>
+                        </div>
+                        <div class="spec-sep"></div>
+                        <div class="spec-item">
+                            <div class="spec-val">25 m²</div>
+                            <div class="spec-key">Jardín trasero</div>
+                        </div>
+                    </div>
+                    <div class="proto-price-blk">
+                        <p class="proto-price-lbl">Precio de preventa desde</p>
+                        <div class="proto-price">$4,900,000</div>
+                        <p class="proto-price-note">* Precio de preventa. IVA no incluido.</p>
+                        <a href="https://wa.me/525530785124" class="btn btn-gold" target="_blank" rel="noopener">Solicitar información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIAMONTE -->
+        <div class="proto-panel" id="panel-piamonte">
+            <div class="proto-grid">
+                <div class="proto-pin anim fade-left">
+                    <img src="https://portofinoatizapan.com/wp-content/uploads/elementor/thumbs/CASAPIOMENTE-qlud05uma7wowdwum9j071ndff20mj3asps63i4sn0.png" alt="Casa Piamonte" />
+                </div>
+                <div class="anim fade-right">
+                    <p class="proto-type">Residencia</p>
+                    <h3 class="proto-name">Casa Piamonte</h3>
+                    <div class="feat-grid">
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1_Mesa-de-trabajo-1.png" alt="" />
+                            <span class="feat-lbl">Cochera 2 autos techada</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-02.png" alt="" />
+                            <span class="feat-lbl">Sala y comedor</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-04.png" alt="" />
+                            <span class="feat-lbl">Cuarto de lavado</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-03.png" alt="" />
+                            <span class="feat-lbl">Cocina con barra desayunador</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-05.png" alt="" />
+                            <span class="feat-lbl">3 Recámaras</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/5.jpg" alt="" />
+                            <span class="feat-lbl">2 Baños</span>
+                        </div>
+                    </div>
+                    <div class="proto-extras">
+                        <p class="proto-extras-ttl">Características adicionales</p>
+                        <ul>
+                            <li>Recámara principal con walk-in closet</li>
+                            <li>Balcones</li>
+                            <li>Bodega</li>
+                            <li>Cisterna de 4,000 litros</li>
+                        </ul>
+                    </div>
+                    <div class="proto-specs">
+                        <div class="spec-item">
+                            <div class="spec-val">173 m²</div>
+                            <div class="spec-key">Construcción</div>
+                        </div>
+                    </div>
+                    <div class="proto-price-blk">
+                        <p class="proto-price-lbl">Precio de preventa desde</p>
+                        <div class="proto-price">$4,900,000</div>
+                        <p class="proto-price-note">* Precio de preventa. IVA no incluido.</p>
+                        <a href="https://wa.me/525530785124" class="btn btn-gold" target="_blank" rel="noopener">Solicitar información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ALBA -->
+        <div class="proto-panel" id="panel-alba">
+            <div class="proto-grid">
+                <div class="proto-pin anim fade-left">
+                    <img src="https://portofinoatizapan.com/wp-content/uploads/elementor/thumbs/Departemntos-ALBA-qlud0y1rz8zakorw1lpt9uj78z711g78wlcqhsyzgc.png" alt="Departamento Alba" />
+                </div>
+                <div class="anim fade-right">
+                    <p class="proto-type">Departamento</p>
+                    <h3 class="proto-name">Departamento Alba</h3>
+                    <div class="feat-grid">
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1_Mesa-de-trabajo-1.png" alt="" />
+                            <span class="feat-lbl">2 cajones auto techados</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-02.png" alt="" />
+                            <span class="feat-lbl">Sala y comedor</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-04.png" alt="" />
+                            <span class="feat-lbl">Cuarto de lavado</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-03.png" alt="" />
+                            <span class="feat-lbl">Cocina con barra desayunador</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-05.png" alt="" />
+                            <span class="feat-lbl">3 Recámaras</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/5.jpg" alt="" />
+                            <span class="feat-lbl">2.5 Baños</span>
+                        </div>
+                        <div class="feat-item">
+                            <img class="feat-icon" src="https://portofinoatizapan.com/wp-content/uploads/2024/03/Sin-titulo-1-07.png" alt="" />
+                            <span class="feat-lbl">Elevador</span>
+                        </div>
+                    </div>
+                    <div class="proto-extras">
+                        <p class="proto-extras-ttl">Características adicionales</p>
+                        <ul>
+                            <li>Recámara principal con walk-in closet</li>
+                            <li>Balcones</li>
+                            <li>Bodega</li>
+                            <li>Cisterna de 140,000 litros</li>
+                        </ul>
+                    </div>
+                    <div class="proto-specs">
+                        <div class="spec-item">
+                            <div class="spec-val">103 m²</div>
+                            <div class="spec-key">Construcción</div>
+                        </div>
+                    </div>
+                    <div class="proto-price-blk">
+                        <p class="proto-price-lbl">Precio de preventa desde</p>
+                        <div class="proto-price">$2,900,000</div>
+                        <p class="proto-price-note">* Precio de preventa. IVA no incluido.</p>
+                        <a href="https://wa.me/525530785124" class="btn btn-gold" target="_blank" rel="noopener">Solicitar información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ───── AMENIDADES ───── -->
+<section id="amenidades" class="sec">
+    <div class="wrap">
+        <div class="amn-hdr">
+            <div class="anim fade-left">
+                <span class="eyebrow">Espacios Comunes</span>
+                <span class="rule"></span>
+                <h2 class="display">Amenidades</h2>
+            </div>
+            <p class="anim fade-right d1">Espacios diseñados para elevar la calidad de vida de toda tu familia.</p>
+        </div>
+        <div class="amn-grid anim fade-up d1">
+            <div class="amn-card">
+                <img src="https://portofinoatizapan.com/wp-content/uploads/2024/04/1.png" alt="Gimnasio" loading="lazy" />
+                <div class="amn-ovl"><span class="amn-lbl">Gimnasio</span></div>
+            </div>
+            <div class="amn-card">
+                <img src="https://portofinoatizapan.com/wp-content/uploads/2024/04/5.png" alt="Roof Garden" loading="lazy" />
+                <div class="amn-ovl"><span class="amn-lbl">Roof Garden</span></div>
+            </div>
+            <div class="amn-card">
+                <img src="https://portofinoatizapan.com/wp-content/uploads/2024/04/4.png" alt="Área Verde" loading="lazy" />
+                <div class="amn-ovl"><span class="amn-lbl">Área Verde</span></div>
+            </div>
+            <div class="amn-card">
+                <img src="https://portofinoatizapan.com/wp-content/uploads/2024/04/6.png" alt="Salón de Eventos" loading="lazy" />
+                <div class="amn-ovl"><span class="amn-lbl">Salón de Eventos</span></div>
+            </div>
+            <div class="amn-card">
+                <img src="https://portofinoatizapan.com/wp-content/uploads/2024/04/2.png" alt="Área de Asador" loading="lazy" />
+                <div class="amn-ovl"><span class="amn-lbl">Área de Asador</span></div>
+            </div>
+            <div class="amn-card">
+                <img src="https://portofinoatizapan.com/wp-content/uploads/2024/04/3.png" alt="Área de Juegos" loading="lazy" />
+                <div class="amn-ovl"><span class="amn-lbl">Área de Juegos</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ───── BENEFICIOS ───── -->
+<section id="beneficios" class="sec">
+    <div class="wrap">
+        <div class="ben-hdr anim fade-up">
+            <span class="eyebrow">Tu tranquilidad, nuestra prioridad</span>
+            <span class="rule rule-c"></span>
+            <h2 class="display">Beneficios</h2>
+        </div>
+        <div class="ben-grid">
+            <div class="ben-col anim fade-left">
+                <p class="ben-col-eyebrow">Seguridad</p>
+                <h3 class="ben-col">Seguridad Privada</h3>
+                <ul class="ben-list">
+                    <li>
+                        <span class="ben-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        Caseta de seguridad
+                    </li>
+                    <li>
+                        <span class="ben-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        Portón automático y acceso controlado
+                    </li>
+                    <li>
+                        <span class="ben-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        Barda perimetral
+                    </li>
+                </ul>
+            </div>
+            <div class="ben-col anim fade-right">
+                <p class="ben-col-eyebrow">Infraestructura</p>
+                <h3 class="ben-col">Infraestructura</h3>
+                <ul class="ben-list">
+                    <li>
+                        <span class="ben-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        Red municipal hidráulica y sanitaria
+                    </li>
+                    <li>
+                        <span class="ben-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        Cisterna de agua potable
+                    </li>
+                    <li>
+                        <span class="ben-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        Sistema de recolección de agua pluvial para riego y usos diversos
+                    </li>
+                    <li>
+                        <span class="ben-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        Área de botes para basura
+                    </li>
+                    <li>
+                        <span class="ben-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        Bonitas vistas a Reserva Federal
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ───── CTA ───── -->
+<section id="cta" class="sec">
+    <div class="wrap">
+        <div class="cta-inner">
+            <div class="cta-text anim fade-left">
+                <span class="eyebrow">Oferta Exclusiva</span>
+                <span class="rule"></span>
+                <h2 class="display">¡Aparta tu<br/>Ubicación!</h2>
+                <p>Aprovecha nuestra promoción exclusiva solo en línea. Asegura tu lugar en el desarrollo residencial más exclusivo de Atizapán. Solo en preventa.</p>
+                <div style="margin-top:2rem;">
+                    <a href="https://wa.me/525530785124" class="btn btn-wa" target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 448 512" style="flex-shrink:0;fill:#fff;"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157z"/></svg>
+                        Escribenos por WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="cta-card anim fade-right d1">
+                <p class="cta-card-lbl">Solo en línea — Aparta con</p>
+                <div class="cta-card-amt">$25,000</div>
+                <p class="cta-card-note">Pesos · Precio de apartado</p>
+                <a href="https://wa.me/525530785124" class="btn btn-gold btn-full" target="_blank" rel="noopener">¡Aparta Ya!</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ───── CONTACTO + UBICACIÓN ───── -->
+<section id="contacto" class="sec">
+    <div class="wrap">
+        <div class="con-hdr anim fade-up">
+            <span class="eyebrow">Ponte en Contacto</span>
+            <span class="rule"></span>
+            <h2 class="display">Contacto</h2>
+        </div>
+        <div class="con-grid">
+            <div class="con-form-col anim fade-left">
+                <p style="margin-bottom:2rem;max-width:48ch;color:var(--muted);">
+                    Te invitamos a escribir el próximo capítulo de tu vida, uno lleno de alegría, seguridad y fineza. ¡Comunícate con nosotros hoy!
+                </p>
+                <form id="con-form" action="mailto:Portofinoatizapan@gmail.com" method="post" enctype="text/plain">
+                    <div class="fgrp">
+                        <label class="flbl" for="fnombre">Nombre completo <span style="color:var(--gold)">*</span></label>
+                        <input class="finp" type="text" id="fnombre" name="nombre" required placeholder="Tu nombre completo" />
+                    </div>
+                    <div class="fgrp">
+                        <label class="flbl" for="ftel">Teléfono <span style="color:var(--gold)">*</span></label>
+                        <input class="finp" type="tel" id="ftel" name="telefono" required placeholder="55 1234 5678" />
+                    </div>
+                    <div class="fgrp">
+                        <label class="flbl" for="femail">Correo electrónico <span style="color:var(--gold)">*</span></label>
+                        <input class="finp" type="email" id="femail" name="email" required placeholder="tu@correo.com" />
+                    </div>
+                    <div class="fgrp">
+                        <label class="flbl" for="fcoment">Comentarios</label>
+                        <textarea class="ftxt" id="fcoment" name="comentarios" placeholder="¿En qué podemos ayudarte?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-navy btn-full">Quiero Información</button>
+                </form>
+
+                <div class="con-info">
+                    <div class="con-info-row">
+                        <div class="con-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <div>
+                            <p class="con-lbl">Dirección</p>
+                            <p class="con-val">Calle Mar de Egeo 5, Lomas Lindas<br/>Atizapán de Zaragoza, Edo. de México</p>
+                        </div>
+                    </div>
+                    <div class="con-info-row">
+                        <div class="con-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg></div>
+                        <div>
+                            <p class="con-lbl">Teléfono</p>
+                            <p class="con-val"><a href="tel:5530785124">55 3078 5124</a></p>
+                        </div>
+                    </div>
+                    <div class="con-info-row">
+                        <div class="con-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                        <div>
+                            <p class="con-lbl">Email</p>
+                            <p class="con-val"><a href="mailto:Portofinoatizapan@gmail.com">Portofinoatizapan@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="socials">
+                        <a href="https://wa.me/525530785124" class="soc-a" title="WhatsApp" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/portofinoresidencialatizapan" class="soc-a" title="Instagram" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/share/QBXEghbGGxeWCRH1/" class="soc-a" title="Facebook" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ubicacion" class="anim fade-right d1">
+                <div class="map-wrap">
+                    <a href="https://maps.app.goo.gl/FDxnqnqvNmYfKhqP6" target="_blank" rel="noopener">
+                        <img src="https://portofinoatizapan.com/wp-content/uploads/2024/04/a04.png"
+                            alt="Mapa ubicación Portofino Residencial" />
+                    </a>
+                    <div class="map-tag">
+                        <p class="map-tag-sub">Ubicación</p>
+                        <p class="map-tag-name">Portofino Residencial</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ───── FOOTER ───── -->
+<footer>
+    <div class="foot-top">
+        <div class="wrap">
+            <div class="foot-grid">
+                <div>
+                    <div class="foot-logo">
+                        <img src="logo portofino.png" alt="Portofino Residencial" />
+                    </div>
+                    <p class="foot-tagline">Un refugio exclusivo donde la elegancia y la comodidad se entrelazan en Atizapán de Zaragoza.</p>
+                    <div class="foot-socials">
+                        <a href="https://wa.me/525530785124" class="foot-soc" title="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157z"/></svg></a>
+                        <a href="https://www.instagram.com/portofinoresidencialatizapan" class="foot-soc" title="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+                        <a href="https://www.facebook.com/share/QBXEghbGGxeWCRH1/" class="foot-soc" title="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></a>
+                    </div>
+                </div>
+                <div>
+                    <p class="foot-col-title">Navegación</p>
+                    <ul class="foot-links">
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#prototipos">Prototipos</a></li>
+                        <li><a href="#amenidades">Amenidades</a></li>
+                        <li><a href="#beneficios">Beneficios</a></li>
+                        <li><a href="#ubicacion">Ubicación</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="foot-col-title">Prototipos</p>
+                    <ul class="foot-links">
+                        <li><a href="#prototipos">Casa Turin</a></li>
+                        <li><a href="#prototipos">Casa Piamonte</a></li>
+                        <li><a href="#prototipos">Departamento Alba</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="foot-col-title">Contacto</p>
+                    <ul class="foot-links">
+                        <li><a href="tel:5530785124">55 3078 5124</a></li>
+                        <li><a href="mailto:Portofinoatizapan@gmail.com">Portofinoatizapan@gmail.com</a></li>
+                        <li><span>Calle Mar de Egeo 5, Lomas Lindas, Atizapán de Zaragoza, Edo. de México</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="foot-btm">
+            <p class="foot-copy">&copy; 2025 Portofino Residencial. Todos los derechos reservados.</p>
+            <p class="foot-copy">Atizapán de Zaragoza, Estado de México</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/525530785124" class="wa-float" target="_blank" rel="noopener" title="Contáctanos por WhatsApp">
+    <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+</a>
+
+<script>
+    // ── NAVBAR SCROLL ──
+    const nav = document.getElementById('nav');
+    const updateNav = () => {
+        if (window.scrollY > 60) { nav.classList.replace('clear','solid'); }
+        else                     { nav.classList.replace('solid','clear'); }
+    };
+    window.addEventListener('scroll', updateNav, { passive:true });
+    updateNav();
+
+    // ── HAMBURGER ──
+    const hbg = document.getElementById('hbg');
+    const mob = document.getElementById('mob-menu');
+    hbg.addEventListener('click', () => {
+        hbg.classList.toggle('open');
+        mob.classList.toggle('open');
+    });
+    mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        hbg.classList.remove('open');
+        mob.classList.remove('open');
+    }));
+
+    // ── SCROLL ANIMATIONS ──
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.anim').forEach(el => io.observe(el));
+
+    // ── COUNT UP ──
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function runCount(el) {
+        const target   = parseInt(el.dataset.count, 10);
+        const duration = 1500;
+        const start    = performance.now();
+        (function tick(now) {
+            const elapsed  = Math.min(now - start, duration);
+            const progress = easeOutCubic(elapsed / duration);
+            el.textContent = Math.round(progress * target);
+            if (elapsed < duration) requestAnimationFrame(tick);
+            else el.textContent = target;
+        })(start);
+    }
+
+    const countIO = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { runCount(e.target); countIO.unobserve(e.target); }
+        });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll('.count-up').forEach(el => countIO.observe(el));
+
+    // ── PROTO TABS ──
+    const tabs   = document.querySelectorAll('.proto-tab');
+    const panels = document.querySelectorAll('.proto-panel');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const id = tab.dataset.tab;
+            tabs.forEach(t => t.classList.remove('on'));
+            panels.forEach(p => p.classList.remove('on'));
+            tab.classList.add('on');
+            const panel = document.getElementById('panel-' + id);
+            panel.classList.add('on');
+            // re-trigger animations in new panel
+            panel.querySelectorAll('.anim').forEach(el => {
+                el.classList.remove('in');
+                requestAnimationFrame(() => requestAnimationFrame(() => io.observe(el)));
+            });
+        });
+    });
+</script>
+</body>
+</html>
